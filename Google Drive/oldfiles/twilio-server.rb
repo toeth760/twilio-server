@@ -6,7 +6,7 @@ require 'csv'
 #require 'uri'
 #require 'rubygems'
 
-set :port, 4568
+set :port, 4567
 set :c, 0
 
 ###get list of urls from csv file
