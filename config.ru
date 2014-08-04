@@ -1,2 +1,2 @@
-
-run twilio-server.rb
+require './twilio-server'
+run TwilioServer
