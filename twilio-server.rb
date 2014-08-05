@@ -217,8 +217,11 @@ url_list = ["https://calltrackdata.com/webreports/audio.jsp?callID=2086701093&au
 
 set :urls, []
 
-url_count = settings.urls.count
+
 ###check url for redirects
+
+settings.urls.push("what")
+url_count = settings.urls.count
 
 def getredirectedurls(url_list)
 	url_list.each do |url|
