@@ -6,8 +6,8 @@ require 'csv'
 #require 'uri'
 #require 'rubygems'
 
-set :port, 4567
-set :c, 0
+#set :port, 4567
+#set :c, 0
 
 ###get list of urls from csv file
 
@@ -217,39 +217,43 @@ urls = ["https://calltrackdata.com/webreports/audio.jsp?callID=2086701093&authen
 
 url_count = urls.count
 
+get '/' do
+  "#{urls}\n#{url_count\n}"
+end
+
 ###check url for redirects
 
-def getredirectedurl(url)
-	result = Curl::Easy.perform(url) do |curl| 
-	  curl.headers["User-Agent"] = "..."
-	  curl.verbose = false
-	  curl.follow_location = true
-	end
-	return result.last_effective_url
-end
+# def getredirectedurl(url)
+# 	result = Curl::Easy.perform(url) do |curl| 
+# 	  curl.headers["User-Agent"] = "..."
+# 	  curl.verbose = false
+# 	  curl.follow_location = true
+# 	end
+# 	return result.last_effective_url
+# end
 
 ###sinatra get request handling
 
-get %r{/.*} do
-	pass if request.path_info == "/favicon.ico"
-	pass if settings.c >= url_count
-	"#{urls[settings.c]}"
-	Twilio::TwiML::Response.new do |r|
-	    r.Say getredirectedurl(urls[settings.c])
-	end.text
-end
+# get %r{/.*} do
+# 	pass if request.path_info == "/favicon.ico"
+# 	pass if settings.c >= url_count
+# 	"#{urls[settings.c]}"
+# 	Twilio::TwiML::Response.new do |r|
+# 	    r.Say getredirectedurl(urls[settings.c])
+# 	end.text
+# end
 
-get %r{/.*} do
-	pass if request.path_info == "/favicon.ico"
-	pass if settings.c < url_count
-	"no more files!"
-end
+# get %r{/.*} do
+# 	pass if request.path_info == "/favicon.ico"
+# 	pass if settings.c < url_count
+# 	"no more files!"
+# end
 
-after do
-	if settings.c < url_count && request.path_info != "/favicon.ico"
-		settings.c += 1
-		puts "sending file #{settings.c} of #{url_count}"
-	else
-		puts "no files to send!"
-	end
-end
+# after do
+# 	if settings.c < url_count && request.path_info != "/favicon.ico"
+# 		settings.c += 1
+# 		puts "sending file #{settings.c} of #{url_count}"
+# 	else
+# 		puts "no files to send!"
+# 	end
+# end
