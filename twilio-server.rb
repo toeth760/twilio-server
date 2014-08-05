@@ -237,7 +237,7 @@ get %r{/.*} do
 	pass if settings.c >= url_count
 	"#{urls[settings.c]}"
 	Twilio::TwiML::Response.new do |r|
-	    r.Say urls[settings.c]
+	    r.Say getredirectedurl(urls[settings.c])
 	end.text
 end
 
