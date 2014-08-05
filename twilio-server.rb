@@ -8,7 +8,7 @@ require 'csv'
 #require 'rubygems'
 
 #set :port, 4567
-set :c, 0
+# set :c, 0
 
 ###get list of urls from csv file
 
@@ -231,6 +231,7 @@ url_count = urls.count
 
 get '/' do
   puts urls
+  puts url_count
 end
 
 ###sinatra get request handling
