@@ -219,9 +219,7 @@ set :urls, url_list
 
 url_count = settings.urls.count
 
-get '/' do
-  "work! #{url_count}"
-end
+
 
 ###check url for redirects
 
@@ -234,6 +232,9 @@ def getredirectedurl(url)
 	return result.last_effective_url
 end
 
+get '/' do
+  "work! #{getredirectedurl(settings.urls[53])}"
+end
 ###sinatra get request handling
 
 # get %r{/.*} do
