@@ -229,27 +229,31 @@ def getredirectedurl(url)
 	return result.last_effective_url
 end
 
+get '/' do
+  puts urls
+end
+
 ###sinatra get request handling
 
-get %r{/.*} do
-	pass if request.path_info == "/favicon.ico"
-	pass if settings.c >= url_count
-	Twilio::TwiML::Response.new do |r|
-	    r.Say getredirectedurl(urls[settings.c])
-	end.text
-end
+# get '/' do
+# 	pass if request.path_info == "/favicon.ico"
+# 	pass if settings.c >= url_count
+# 	Twilio::TwiML::Response.new do |r|
+# 	    r.Say getredirectedurl(urls[settings.c])
+# 	end.text
+# end
 
-get %r{/.*} do
-	pass if request.path_info == "/favicon.ico"
-	pass if settings.c < url_count
-	"no more files!"
-end
+# get '/' do
+# 	pass if request.path_info == "/favicon.ico"
+# 	pass if settings.c < url_count
+# 	"no more files!"
+# end
 
-after do
-	if settings.c < url_count && request.path_info != "/favicon.ico"
-		settings.c += 1
-		puts "sending file #{settings.c} of #{url_count}"
-	else
-		puts "no files to send!"
-	end
-end
+# after do
+# 	if settings.c < url_count && request.path_info != "/favicon.ico"
+# 		settings.c += 1
+# 		puts "sending file #{settings.c} of #{url_count}"
+# 	else
+# 		puts "no files to send!"
+# 	end
+# end
