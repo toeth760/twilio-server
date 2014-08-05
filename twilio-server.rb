@@ -238,7 +238,7 @@ end
 
 
 get '/' do
-  "work! #{url_list[50]}"
+  "work! #{settings.urls[0]}"
 end
 ###sinatra get request handling
 
