@@ -225,14 +225,14 @@ end
 
 ###check url for redirects
 
-# def getredirectedurl(url)
-# 	result = Curl::Easy.perform(url) do |curl| 
-# 	  curl.headers["User-Agent"] = "..."
-# 	  curl.verbose = false
-# 	  curl.follow_location = true
-# 	end
-# 	return result.last_effective_url
-# end
+def getredirectedurl(url)
+	result = Curl::Easy.perform(url) do |curl| 
+	  curl.headers["User-Agent"] = "..."
+	  curl.verbose = false
+	  curl.follow_location = true
+	end
+	return result.last_effective_url
+end
 
 ###sinatra get request handling
 
