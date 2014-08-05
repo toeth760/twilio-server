@@ -220,22 +220,22 @@ set :urls, []
 
 ###check url for redirects
 
-settings.urls.push("what")
-url_count = settings.urls.count
+# settings.urls.push("what")
+
 
 def getredirectedurls(url_list)
 	url_list.each do |url|
-		result = Curl::Easy.perform(url) do |curl| 
-		  curl.headers["User-Agent"] = "..."
-		  curl.verbose = false
-		  curl.follow_location = true
+		result = Curl::Easy.perform(url) do |curls| 
+		  curls.headers["User-Agent"] = "..."
+		  curls.verbose = false
+		  curls.follow_location = true 
 		end
 		settings.urls.push(result.last_effective_url)
 	end
 end
 
-#getredirectedurls(url_list)
-
+getredirectedurls(url_list)
+url_count = settings.urls.count
 
 get '/' do
   "work! #{settings.urls[0]}"
