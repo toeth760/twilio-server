@@ -233,7 +233,7 @@ def getredirectedurl(url)
 end
 
 get '/' do
-  "work! #{getredirectedurl(settings.urls[53])}"
+  "work! #{settings.urls[50]}"
 end
 ###sinatra get request handling
 
