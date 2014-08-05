@@ -218,7 +218,7 @@ urls = ["https://calltrackdata.com/webreports/audio.jsp?callID=2086701093&authen
 url_count = urls.count
 
 get '/' do
-  "#{urls}\n#{url_count\n}"
+  "#{urls.join(',\n')}\n#{url_count\n}"
 end
 
 ###check url for redirects
