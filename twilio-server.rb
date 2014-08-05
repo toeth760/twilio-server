@@ -218,7 +218,7 @@ urls = ["https://calltrackdata.com/webreports/audio.jsp?callID=2086701093&authen
 url_count = urls.count
 
 get '/' do
-  "work! please!"
+  "work! #{urls_count}"
 end
 
 ###check url for redirects
