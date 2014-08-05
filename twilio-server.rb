@@ -6,7 +6,7 @@ require 'csv'
 #require 'uri'
 #require 'rubygems'
 
-# set :port, 4567
+set :port, 4567
 set :c, 0
 
 ###get list of urls from csv file
@@ -233,6 +233,7 @@ end
 get %r{/.*} do
 	pass if request.path_info == "/favicon.ico"
 	pass if settings.c >= url_count
+	"#{urls[settings.c]}"
 	Twilio::TwiML::Response.new do |r|
 	    r.Say getredirectedurl(urls[settings.c])
 	end.text
