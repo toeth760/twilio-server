@@ -219,14 +219,14 @@ url_count = urls.length
 
 ###check url for redirects
 
-def getredirectedurl(url)
-	result = Curl::Easy.perform(url) do |curls| 
-	  curls.headers["User-Agent"] = "..."
-	  curls.verbose = false
-	  curls.follow_location = true 
-	end
-	return result.last_effective_url
-end
+# def getredirectedurl(url)
+# 	result = Curl::Easy.perform(url) do |curls| 
+# 	  curls.headers["User-Agent"] = "..."
+# 	  curls.verbose = false
+# 	  curls.follow_location = true 
+# 	end
+# 	return result.last_effective_url
+# end
 
 ###sinatra get request handling
 
@@ -235,7 +235,7 @@ get %r{/.*} do
 	pass if settings.c >= url_count
 	"#{urls[settings.c]}"
 	Twilio::TwiML::Response.new do |r|
-	    r.Say getredirectedurl(urls[settings.c])
+	    r.Say urls[settings.c]
 	end.text
 end
 
