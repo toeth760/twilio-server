@@ -11,7 +11,7 @@ set :c, 0
 
 ###get list of urls from csv file
 
-url_list = ["https://calltrackdata.com/webreports/audio.jsp?callID=2086701093&authentication=75E0E52C2F022233FC3070FC979C7E33",
+urls = ["https://calltrackdata.com/webreports/audio.jsp?callID=2086701093&authentication=75E0E52C2F022233FC3070FC979C7E33",
 "https://calltrackdata.com/webreports/audio.jsp?callID=2086725818&authentication=21C006EED2356B4A1D796F0DE957C6DA",
 "https://calltrackdata.com/webreports/audio.jsp?callID=44609277&authentication=5D46E05C2DF139E6C4C47F16206287C1",
 "https://calltrackdata.com/webreports/audio.jsp?callID=2086781467&authentication=E83484B24EC788F446EABC7F6B4049A0",
@@ -215,53 +215,41 @@ url_list = ["https://calltrackdata.com/webreports/audio.jsp?callID=2086701093&au
 "https://calltrackdata.com/webreports/audio.jsp?callID=2098613009&authentication=C76B190695F7141D22C01D4F538C3338",
 "https://calltrackdata.com/webreports/audio.jsp?callID=48263784&authentication=74FDEF6D61D8D28A3D536233EEBAF4CB"]
 
-set :urls, []
-
+url_count = urls.length
 
 ###check url for redirects
 
-# settings.urls.push("what")
-
-
-def getredirectedurls(url_list)
-	url_list.each do |url|
-		result = Curl::Easy.perform(url) do |curls| 
-		  curls.headers["User-Agent"] = "..."
-		  curls.verbose = false
-		  curls.follow_location = true 
-		end
-		settings.urls.push(result.last_effective_url)
+def getredirectedurl(url)
+	result = Curl::Easy.perform(url) do |curls| 
+	  curls.headers["User-Agent"] = "..."
+	  curls.verbose = false
+	  curls.follow_location = true 
 	end
+	return result.last_effective_url
 end
 
-getredirectedurls(url_list)
-url_count = settings.urls.count
-
-get '/' do
-  "work! #{settings.urls[0]}"
-end
 ###sinatra get request handling
 
-# get %r{/.*} do
-# 	pass if request.path_info == "/favicon.ico"
-# 	pass if settings.c >= url_count
-# 	"#{urls[settings.c]}"
-# 	Twilio::TwiML::Response.new do |r|
-# 	    r.Say getredirectedurl(urls[settings.c])
-# 	end.text
-# end
+get %r{/.*} do
+	pass if request.path_info == "/favicon.ico"
+	pass if settings.c >= url_count
+	"#{urls[settings.c]}"
+	Twilio::TwiML::Response.new do |r|
+	    r.Say getredirectedurl(urls[settings.c])
+	end.text
+end
 
-# get %r{/.*} do
-# 	pass if request.path_info == "/favicon.ico"
-# 	pass if settings.c < url_count
-# 	"no more files!"
-# end
+get %r{/.*} do
+	pass if request.path_info == "/favicon.ico"
+	pass if settings.c < url_count
+	"no more files!"
+end
 
-# after do
-# 	if settings.c < url_count && request.path_info != "/favicon.ico"
-# 		settings.c += 1
-# 		puts "sending file #{settings.c} of #{url_count}"
-# 	else
-# 		puts "no files to send!"
-# 	end
-# end
+after do
+	if settings.c < url_count && request.path_info != "/favicon.ico"
+		settings.c += 1
+		puts "sending file #{settings.c} of #{url_count}"
+	else
+		puts "no files to send!"
+	end
+end
