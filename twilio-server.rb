@@ -230,7 +230,7 @@ def getredirectedurls(url_list)
 	end
 end
 
-getrediredtedurls(url_list)
+getredirectedurls(url_list)
 
 
 get '/' do
