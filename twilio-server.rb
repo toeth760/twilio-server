@@ -219,14 +219,16 @@ url_count = urls.length
 
 ###check url for redirects
 
-# def getredirectedurl(url)
-# 	result = Curl::Easy.perform(url) do |curls| 
-# 	  curls.headers["User-Agent"] = "..."
-# 	  curls.verbose = false
-# 	  curls.follow_location = true 
-# 	end
-# 	return result.last_effective_url
-# end
+def getredirectedurl(url)
+	result = Curl::Easy.perform(url) do |curl| 
+	  curl.headers["User-Agent"] = "..."
+	  curl.verbose = false
+	  curl.follow_location = true 
+	  curl.use_ssl = 3
+  	  curl.ssl_version = 3
+	end
+	return result.last_effective_url
+end
 
 ###sinatra get request handling
 
