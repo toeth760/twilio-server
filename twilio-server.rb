@@ -7,7 +7,7 @@ require 'csv'
 #require 'uri'
 #require 'rubygems'
 
-set :port, 4567
+#set :port, 4567
 set :c, 0
 
 ###get list of urls from csv file
@@ -220,14 +220,14 @@ url_count = urls.count
 
 ###check url for redirects
 
-def getredirectedurl(url)
-	result = Curl::Easy.perform(url) do |curl| 
-	  curl.headers["User-Agent"] = "..."
-	  curl.verbose = false
-	  curl.follow_location = true
-	end
-	return result.last_effective_url
-end
+# def getredirectedurl(url)
+# 	result = Curl::Easy.perform(url) do |curl| 
+# 	  curl.headers["User-Agent"] = "..."
+# 	  curl.verbose = false
+# 	  curl.follow_location = true
+# 	end
+# 	return result.last_effective_url
+# end
 
 get '/' do
   puts urls
