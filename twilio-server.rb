@@ -1,7 +1,7 @@
-require 'twilio-ruby'
+# require 'twilio-ruby'
 require 'sinatra'
-require 'curl'
-require 'csv'
+# require 'curl'
+# require 'csv'
 
 #require 'httpclient' => sinatra require does not lke this require for some reason... find out why (need this for redirects)
 #require 'uri'
