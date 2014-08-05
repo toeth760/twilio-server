@@ -215,25 +215,26 @@ url_list = ["https://calltrackdata.com/webreports/audio.jsp?callID=2086701093&au
 "https://calltrackdata.com/webreports/audio.jsp?callID=2098613009&authentication=C76B190695F7141D22C01D4F538C3338",
 "https://calltrackdata.com/webreports/audio.jsp?callID=48263784&authentication=74FDEF6D61D8D28A3D536233EEBAF4CB"]
 
-set :urls, url_list
 
+
+set :urls, []
 url_count = settings.urls.count
-
-
 
 ###check url for redirects
 
-def getredirectedurl(url)
-	result = Curl::Easy.perform(url) do |curl| 
-	  curl.headers["User-Agent"] = "..."
-	  curl.verbose = false
-	  curl.follow_location = true
-	end
-	return result.last_effective_url
-end
+# def getredirectedurl(url_list)
+# 	url_list.each do |url|
+# 		result = Curl::Easy.perform(url) do |curl| 
+# 		  curl.headers["User-Agent"] = "..."
+# 		  curl.verbose = false
+# 		  curl.follow_location = true
+# 		end
+# 		settings.urls.push = result.last_effective_url
+# 	end
+# end
 
 get '/' do
-  "work! #{getredirectedurl(settings.urls[50])}"
+  "work! #{url_count}"
 end
 ###sinatra get request handling
 
