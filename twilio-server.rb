@@ -216,6 +216,7 @@ url_list = ["https://calltrackdata.com/webreports/audio.jsp?callID=2086701093&au
 "https://calltrackdata.com/webreports/audio.jsp?callID=48263784&authentication=74FDEF6D61D8D28A3D536233EEBAF4CB"]
 
 set :urls, []
+
 url_count = settings.urls.count
 ###check url for redirects
 
@@ -226,7 +227,7 @@ def getredirectedurls(url_list)
 		  curl.verbose = false
 		  curl.follow_location = true
 		end
-		settings.urls.push = result.last_effective_url
+		settings.urls.push(result.last_effective_url)
 	end
 end
 
