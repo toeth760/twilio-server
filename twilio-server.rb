@@ -11,7 +11,7 @@ require 'csv'
 
 ###get list of urls from csv file
 
-urls = ["https://calltrackdata.com/webreports/audio.jsp?callID=2086701093&authentication=75E0E52C2F022233FC3070FC979C7E33",
+set :urls, ["https://calltrackdata.com/webreports/audio.jsp?callID=2086701093&authentication=75E0E52C2F022233FC3070FC979C7E33",
 "https://calltrackdata.com/webreports/audio.jsp?callID=2086725818&authentication=21C006EED2356B4A1D796F0DE957C6DA",
 "https://calltrackdata.com/webreports/audio.jsp?callID=44609277&authentication=5D46E05C2DF139E6C4C47F16206287C1",
 "https://calltrackdata.com/webreports/audio.jsp?callID=2086781467&authentication=E83484B24EC788F446EABC7F6B4049A0",
@@ -215,7 +215,7 @@ urls = ["https://calltrackdata.com/webreports/audio.jsp?callID=2086701093&authen
 "https://calltrackdata.com/webreports/audio.jsp?callID=2098613009&authentication=C76B190695F7141D22C01D4F538C3338",
 "https://calltrackdata.com/webreports/audio.jsp?callID=48263784&authentication=74FDEF6D61D8D28A3D536233EEBAF4CB"]
 
-url_count = urls.count
+url_count = settings.urls.count
 
 get '/' do
   "work! #{urls_count}"
