@@ -2,14 +2,10 @@ require 'twilio-ruby'
 require 'sinatra'
 require 'curl'
 require 'csv'
-#require 'httpclient' => sinatra require does not lke this require for some reason... find out why (need this for redirects)
-#require 'uri'
-#require 'rubygems'
 
-set :port, 4567
 set :c, 0
 
-###get list of urls from csv file
+###list of urls from csv file
 
 urls = ["https://calltrackdata.com/webreports/audio.jsp?callID=2086701093&authentication=75E0E52C2F022233FC3070FC979C7E33",
 "https://calltrackdata.com/webreports/audio.jsp?callID=2086725818&authentication=21C006EED2356B4A1D796F0DE957C6DA",
