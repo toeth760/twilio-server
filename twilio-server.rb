@@ -231,11 +231,11 @@ def getredirectedurls(url_list)
 	end
 end
 
-getredirectedurls(url_list)
+#getredirectedurls(url_list)
 
 
 get '/' do
-  "work! #{url_count}"
+  "work! #{url_list[50]}"
 end
 ###sinatra get request handling
 
