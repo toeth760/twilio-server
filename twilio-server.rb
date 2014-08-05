@@ -216,7 +216,6 @@ url_list = ["https://calltrackdata.com/webreports/audio.jsp?callID=2086701093&au
 "https://calltrackdata.com/webreports/audio.jsp?callID=48263784&authentication=74FDEF6D61D8D28A3D536233EEBAF4CB"]
 
 set :urls, []
-url_count1 = settings.urls.count
 
 ###check url for redirects
 
@@ -231,11 +230,11 @@ def getredirectedurls(url_list)
 	end
 end
 
-getredirectedurls(url_list)
-url_count2 = settings.urls.count
+getrediredtedurls(url_list)
+url_count = settings.urls.count
 
 get '/' do
-  "work! #{url_count} #{url_count2}"
+  "work! #{url_count}"
 end
 ###sinatra get request handling
 
