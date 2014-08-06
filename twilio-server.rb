@@ -14,6 +14,7 @@ begin
 	url_count = urls.length
 	puts "$mark$ csv was read, there are #{url_count} urls in the list. Should be 204"
 	rescue Exception => msg
+	"$mark$ had this error: #{msg}"
 	puts msg
 end
 
