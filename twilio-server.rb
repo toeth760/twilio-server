@@ -54,6 +54,7 @@ get %r{/.*} do
 	temp_text.gsub! '>', '&gt'
 	temp_text.gsub! '"', '&quot'
 	temp_text.gsub! '\'', '&#039'
+	temp_text.gsub! '&', '&amp'
 	twil_text = "<html>\n<body>\n<pre>\n" + temp_text + "\n</pre>\n</body>\n</html>"
 end
 
