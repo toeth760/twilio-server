@@ -11,7 +11,7 @@ set :c, 0
 # 	csv = CSV.read( csv_fname, :headers=>true)
 # 	urls = csv['call_recording_url']
 # 	urls = urls.uniq
-# 	url_count = urls.length
+# 	
 # 	puts "$mark$ csv was read, there are #{url_count} urls in the list. Should be 204"
 # 	rescue Exception => msg
 # 	"$mark$ had this error: #{msg}"
@@ -24,6 +24,7 @@ urls = ["https://calltrackdata.com/webreports/audio.jsp?callID=2086701093&authen
 "https://calltrackdata.com/webreports/audio.jsp?callID=2086781467&authentication=E83484B24EC788F446EABC7F6B4049A0",
 "https://calltrackdata.com/webreports/audio.jsp?callID=2086796602&authentication=3B37BCD861F88B4F8D4366E3004370B5"]
 
+url_count = urls.length
 
 ###check url for redirects
 
