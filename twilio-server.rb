@@ -6,13 +6,16 @@ require 'csv'
 set :c, 0
 
 ###get urls from csv file
-
-csv_fname = "callinfo.csv"
-csv = CSV.read( csv_fname, :headers=>true)
-urls = csv['call_recording_url']
-urls = urls.uniq
-url_count = urls.length
-puts "$mark$ csv was read, there are #{url_count} urls in the list. Should be 204"
+begin
+	csv_fname = "callinfo.csv"
+	csv = CSV.read( csv_fname, :headers=>true)
+	urls = csv['call_recording_url']
+	urls = urls.uniq
+	url_count = urls.length
+	puts "$mark$ csv was read, there are #{url_count} urls in the list. Should be 204"
+	rescue Exception => msg
+	puts msg
+end
 
 ###check url for redirects
 
