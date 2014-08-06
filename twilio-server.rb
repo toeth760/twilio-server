@@ -44,20 +44,20 @@ end
 get %r{/.*} do
 	pass if request.path_info == "/favicon.ico"
 	pass if settings.c >= url_count
-	"#{urls[settings.c]}"
+	# "#{urls[settings.c]}"
 	twil_obj = Twilio::TwiML::Response.new do |r|
-		r.Say 'Hello. The recording will play now.'
+		# r.Say 'Hello. The recording will play now.'
 	    r.Say getredirectedurl(urls[settings.c]).sub('https', 'http')
-	end
+	end.text
 	###format twil_text for html code
-	temp_text = twil_obj.text
-	temp_text.gsub! '&', '&amp'
-	temp_text.gsub! '<', '&lt'
-	temp_text.gsub! '>', '&gt'
-	temp_text.gsub! '"', '&quot'
-	temp_text.gsub! '\'', '&#039'
+	# temp_text = twil_obj.text
+	# temp_text.gsub! '&', '&amp'
+	# temp_text.gsub! '<', '&lt'
+	# temp_text.gsub! '>', '&gt'
+	# temp_text.gsub! '"', '&quot'
+	# temp_text.gsub! '\'', '&#039'
 
-	twil_text = "<html>\n<body>\n<pre>\n" + temp_text + "\n</pre>\n</body>\n</html>"
+	# twil_text = "<html>\n<body>\n<pre>\n" + temp_text + "\n</pre>\n</body>\n</html>"
 end
 
 get %r{/.*} do
