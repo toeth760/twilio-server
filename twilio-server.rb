@@ -45,7 +45,7 @@ get %r{/.*} do
 	pass if request.path_info == "/favicon.ico"
 	pass if settings.c >= url_count
 	"#{urls[settings.c]}"
-	text = Twilio::TwiML::Response.new do |r|
+	Twilio::TwiML::Response.new do |r|
 	    r.Say getredirectedurl(urls[settings.c])
 	end.text => text
 	return text
