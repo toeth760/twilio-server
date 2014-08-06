@@ -50,11 +50,12 @@ get %r{/.*} do
 	end
 	###format twil_text for html code
 	temp_text = twil_obj.text
+	temp_text.gsub! '&', '&amp'
 	temp_text.gsub! '<', '&lt'
 	temp_text.gsub! '>', '&gt'
 	temp_text.gsub! '"', '&quot'
 	temp_text.gsub! '\'', '&#039'
-	temp_text.gsub! '&', '&amp'
+
 	twil_text = "<html>\n<body>\n<pre>\n" + temp_text + "\n</pre>\n</body>\n</html>"
 end
 
