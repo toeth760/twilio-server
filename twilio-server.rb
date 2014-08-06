@@ -46,7 +46,8 @@ get %r{/.*} do
 	pass if settings.c >= url_count
 	"#{urls[settings.c]}"
 	twil_obj = Twilio::TwiML::Response.new do |r|
-	    r.Say getredirectedurl(urls[settings.c])
+		r.Say 'Hello. The recording will play now.'
+	    r.Say getredirectedurl(urls[settings.c]).sub('https', 'http')
 	end
 	###format twil_text for html code
 	temp_text = twil_obj.text
