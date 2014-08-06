@@ -47,8 +47,8 @@ get %r{/.*} do
 	"#{urls[settings.c]}"
 	Twilio::TwiML::Response.new do |r|
 	    r.Say getredirectedurl(urls[settings.c])
-	end => text
-	return text
+	end.text
+	return "test"
 end
 
 get %r{/.*} do
