@@ -74,6 +74,10 @@ post '/' do
 	puts "why is it posting?"
 end
 
+head '/' do
+	status 200
+end
+
 # after '/' do
 # 	if settings.c < url_count && request.path_info != "/favicon.ico"
 # 		# settings.c += 1
