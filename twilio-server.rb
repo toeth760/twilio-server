@@ -49,8 +49,8 @@ get '/' do
 	    r.Say getredirectedurl(urls[settings.c]).sub('https', 'http')
 	end
 
-	settings.c += 1
 	puts "sending file #{settings.c} of #{url_count}"
+	settings.c += 1
 	twil_text = twil_obj.text
 
 	###format twil_text for html code
