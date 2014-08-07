@@ -66,6 +66,7 @@ end
 
 get '/' do
 	pass if request.path_info == "/favicon.ico" || settings.c < url_count
+	
 	puts "no more files to send!"
 	"no more files to send!"
 end
