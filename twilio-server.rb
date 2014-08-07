@@ -71,11 +71,13 @@ get '/' do
 end
 
 post '/' do
+	status 200
 	puts "why is it posting?"
 end
 
 head '/' do
 	status 200
+	puts "it is requesting the headers."
 end
 
 # after '/' do
