@@ -39,16 +39,20 @@ def getredirectedurl(url)
 	return result.last_effective_url
 end
 
-###sinatra get request handling
+###sinatra get request handling %r{/.*}
 
-get %r{/.*} do
-	pass if request.path_info == "/favicon.ico"
-	pass if settings.c >= url_count
-	# "#{urls[settings.c]}"
+get '/' do
+	pass if request.path_info == "/favicon.ico" || settings.c >= url_count 
+	
 	twil_obj = Twilio::TwiML::Response.new do |r|
 		# r.Say 'Hello. The recording will play now.'
 	    r.Say getredirectedurl(urls[settings.c]).sub('https', 'http')
-	end.text
+	end
+
+	settings.c += 1
+	puts "sending file #{settings.c} of #{url_count}"
+	twil_text = twil_obj.text
+
 	###format twil_text for html code
 	# temp_text = twil_obj.text
 	# temp_text.gsub! '&', '&amp'
@@ -60,17 +64,21 @@ get %r{/.*} do
 	# twil_text = "<html>\n<body>\n<pre>\n" + temp_text + "\n</pre>\n</body>\n</html>"
 end
 
-get %r{/.*} do
-	pass if request.path_info == "/favicon.ico"
-	pass if settings.c < url_count
-	"no more files!"
+get '/' do
+	pass if request.path_info == "/favicon.ico" || settings.c < url_count
+	puts "no more files to send!"
+	"no more files to send!"
 end
 
-after do
-	if settings.c < url_count && request.path_info != "/favicon.ico"
-		settings.c += 1
-		puts "sending file #{settings.c} of #{url_count}"
-	else
-		puts "no files to send!"
-	end
+post '/' do
+	puts "why is it posting?"
 end
+
+# after '/' do
+# 	if settings.c < url_count && request.path_info != "/favicon.ico"
+# 		# settings.c += 1
+# 		puts "sending file #{settings.c} of #{url_count}"
+# 	else
+# 		puts "no files to send!"
+# 	end
+# end
