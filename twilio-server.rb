@@ -42,10 +42,10 @@ end
 ###sinatra get request handling %r{/.*}
 
 get '/favicon.ico' do
-	return ""
+	return "We have no icons for you, shoo!"
 end
 
-get '/' do
+get '/get-twiml' do
 	pass if settings.c >= url_count 
 	
 	# twil_obj = Twilio::TwiML::Response.new do |r|
@@ -54,9 +54,9 @@ get '/' do
 	# end
 
 	# settings.c += 1
-	puts "1) sending file #{settings.c} of #{url_count}"
+	#puts "1) sending file #{settings.c} of #{url_count}"
 	# twil_text = twil_obj.text
-	return setting.c
+	return settings.c
 	# return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n	<Play>https://calltrackdata.com/webreports/audio/20140501/2086781467_bcvwthia.mp3</Play>\n</Response>"
 
 	###format twil_text for html code
@@ -70,27 +70,25 @@ get '/' do
 	# twil_text = "<html>\n<body>\n<pre>\n" + temp_text + "\n</pre>\n</body>\n</html>"
 end
 
-get '/' do
+get '/get-twiml' do
 	pass if settings.c < url_count
-	puts "no more files to send!"
-	return "no more files to send!"
+	puts "No more files to send!"
+	return "No more files!"
 end
 
-# post '/' do
-# 	status 200
-# 	puts "why is it posting?"
-# end
+post '/' do
+	puts "Attempted POST"
+	return "NO POST ON SUNDAYS"
+end
 
-# head '/' do
-# 	status 200
-# 	puts "it is requesting the headers."
-# end
+head '/' do
+	puts "Attempted HEAD"
+	return "HEAD AWAY FROM HERE"
+end
 
-after '/' do
-	if settings.c < url_count && request.path_info != "/favicon.ico"
+after '/get-twiml' do
+	if settings.c < url_count
 		settings.c += 1
-		puts "2) sending file #{settings.c} of #{url_count}"
-	else
-		puts "no files to send!"
+		puts "Sent url #{settings.c} of #{url_count}"
 	end
 end
