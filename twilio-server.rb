@@ -54,7 +54,7 @@ get '/' do
 	# end
 
 	# settings.c += 1
-	puts "sending file #{settings.c} of #{url_count}"
+	puts "1) sending file #{settings.c} of #{url_count}"
 	# twil_text = twil_obj.text
 
 	return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n	<Play>https://calltrackdata.com/webreports/audio/20140501/2086781467_bcvwthia.mp3</Play>\n</Response>"
@@ -89,7 +89,7 @@ end
 after '/' do
 	if settings.c < url_count && request.path_info != "/favicon.ico"
 		settings.c += 1
-		puts "sending file #{settings.c} of #{url_count}"
+		puts "2) sending file #{settings.c} of #{url_count}"
 	else
 		puts "no files to send!"
 	end
