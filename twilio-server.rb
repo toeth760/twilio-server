@@ -19,8 +19,6 @@ set :c, 0
 # end
 
 urls = ["https://calltrackdata.com/webreports/audio.jsp?callID=2086781467&authentication=E83484B24EC788F446EABC7F6B4049A0",
-# "https://calltrackdata.com/webreports/audio.jsp?callID=2086701093&authentication=75E0E52C2F022233FC3070FC979C7E33",
-# "https://calltrackdata.com/webreports/audio.jsp?callID=2086725818&authentication=21C006EED2356B4A1D796F0DE957C6DA",
 "https://calltrackdata.com/webreports/audio.jsp?callID=44609277&authentication=5D46E05C2DF139E6C4C47F16206287C1",
 "https://calltrackdata.com/webreports/audio.jsp?callID=2086796602&authentication=3B37BCD861F88B4F8D4366E3004370B5"]
 
@@ -47,22 +45,19 @@ get '/' do
 end
 
 get '/favicon.ico' do
+	puts "We have no icons for you, shoo!"
 	return "We have no icons for you, shoo!"
 end
 
 get '/get-twiml' do
 	pass if settings.c >= url_count 
 	
-	# twil_obj = Twilio::TwiML::Response.new do |r|
-	# 	# r.Say 'Hello. The recording will play now.'
-	#     r.Say getredirectedurl(urls[settings.c]).sub('https', 'http')
-	# end
+	twil_obj = Twilio::TwiML::Response.new do |r|
+		# r.Say 'Hello. The recording will play now.'
+	    r.Say getredirectedurl(urls[settings.c]).sub('https', 'http')
+	end
 
-	# settings.c += 1
-	#puts "1) sending file #{settings.c} of #{url_count}"
-	# twil_text = twil_obj.text
-	return settings.c.to_s
-	# return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n	<Play>https://calltrackdata.com/webreports/audio/20140501/2086781467_bcvwthia.mp3</Play>\n</Response>"
+	return twil_obj.text
 
 	###format twil_text for html code
 	# temp_text = twil_obj.text
