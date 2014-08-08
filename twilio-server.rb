@@ -56,8 +56,8 @@ get '/' do
 	# settings.c += 1
 	puts "1) sending file #{settings.c} of #{url_count}"
 	# twil_text = twil_obj.text
-
-	return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n	<Play>https://calltrackdata.com/webreports/audio/20140501/2086781467_bcvwthia.mp3</Play>\n</Response>"
+	return setting.c
+	# return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n	<Play>https://calltrackdata.com/webreports/audio/20140501/2086781467_bcvwthia.mp3</Play>\n</Response>"
 
 	###format twil_text for html code
 	# temp_text = twil_obj.text
