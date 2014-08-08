@@ -76,12 +76,39 @@ get '/get-twiml' do
 	return "No more files!"
 end
 
-post '/' do
-	puts "Attempted POST"
-	return "NO POST ON SUNDAYS"
+post '/get-twiml' do
+	pass if settings.c >= url_count 
+	
+	twil_obj = Twilio::TwiML::Response.new do |r|
+		# r.Say 'Hello. The recording will play now.'
+	    r.Say getredirectedurl(urls[settings.c]).sub('https', 'http')
+	end
+
+	return twil_obj.text
+
+	###format twil_text for html code
+	# temp_text = twil_obj.text
+	# temp_text.gsub! '&', '&amp'
+	# temp_text.gsub! '<', '&lt'
+	# temp_text.gsub! '>', '&gt'
+	# temp_text.gsub! '"', '&quot'
+	# temp_text.gsub! '\'', '&#039'
+
+	# twil_text = "<html>\n<body>\n<pre>\n" + temp_text + "\n</pre>\n</body>\n</html>"
 end
 
-head '/' do
+post '/get-twiml' do
+	pass if settings.c < url_count
+	puts "No more files to send!"
+	return "No more files!"
+end
+
+# post %r{/.*} do
+# 	puts "Attempted POST"
+# 	return "NO POST ON SUNDAYS"
+# end
+
+head %r{/.*} do
 	puts "Attempted HEAD"
 	return "HEAD AWAY FROM HERE"
 end
