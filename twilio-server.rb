@@ -53,7 +53,7 @@ get '/' do
 	puts "sending file #{settings.c} of #{url_count}"
 	# twil_text = twil_obj.text
 
-	twil_text = "<?xml version="1.0" encoding=\"UTF-8\"?>
+	twil_text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <Response>
   <Play>https://calltrackdata.com/webreports/audio/20140501/2086781467_bcvwthia.mp3</Play>
 </Response>"
