@@ -41,8 +41,12 @@ end
 
 ###sinatra get request handling %r{/.*}
 
+get '/favicon.ico' do
+	return ""
+end
+
 get '/' do
-	pass if request.path_info == "/favicon.ico" || settings.c >= url_count 
+	pass if settings.c >= url_count 
 	
 	# twil_obj = Twilio::TwiML::Response.new do |r|
 	# 	# r.Say 'Hello. The recording will play now.'
@@ -53,10 +57,7 @@ get '/' do
 	puts "sending file #{settings.c} of #{url_count}"
 	# twil_text = twil_obj.text
 
-	twil_text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<Response>
-  <Play>https://calltrackdata.com/webreports/audio/20140501/2086781467_bcvwthia.mp3</Play>
-</Response>"
+	return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n	<Play>https://calltrackdata.com/webreports/audio/20140501/2086781467_bcvwthia.mp3</Play>\n</Response>"
 
 	###format twil_text for html code
 	# temp_text = twil_obj.text
@@ -70,10 +71,9 @@ get '/' do
 end
 
 get '/' do
-	pass if request.path_info == "/favicon.ico" || settings.c < url_count
-
+	pass if settings.c < url_count
 	puts "no more files to send!"
-	"no more files to send!"
+	return "no more files to send!"
 end
 
 # post '/' do
