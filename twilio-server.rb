@@ -49,7 +49,7 @@ get '/' do
 	#     r.Say getredirectedurl(urls[settings.c]).sub('https', 'http')
 	# end
 
-	settings.c += 1
+	# settings.c += 1
 	puts "sending file #{settings.c} of #{url_count}"
 	# twil_text = twil_obj.text
 
@@ -76,21 +76,21 @@ get '/' do
 	"no more files to send!"
 end
 
-post '/' do
-	status 200
-	puts "why is it posting?"
-end
-
-head '/' do
-	status 200
-	puts "it is requesting the headers."
-end
-
-# after '/' do
-# 	if settings.c < url_count && request.path_info != "/favicon.ico"
-# 		# settings.c += 1
-# 		puts "sending file #{settings.c} of #{url_count}"
-# 	else
-# 		puts "no files to send!"
-# 	end
+# post '/' do
+# 	status 200
+# 	puts "why is it posting?"
 # end
+
+# head '/' do
+# 	status 200
+# 	puts "it is requesting the headers."
+# end
+
+after '/' do
+	if settings.c < url_count && request.path_info != "/favicon.ico"
+		settings.c += 1
+		puts "sending file #{settings.c} of #{url_count}"
+	else
+		puts "no files to send!"
+	end
+end
