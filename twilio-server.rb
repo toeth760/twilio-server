@@ -81,7 +81,7 @@ post '/get-twiml' do
 	
 	twil_obj = Twilio::TwiML::Response.new do |r|
 		# r.Say 'Hello. The recording will play now.'
-	    r.Say getredirectedurl(urls[settings.c]).sub('https', 'http')
+	    r.Play getredirectedurl(urls[settings.c]).sub('https', 'http')
 	end
 
 	return twil_obj.text
