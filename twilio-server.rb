@@ -3,26 +3,27 @@ require 'sinatra'
 require 'curl'
 require 'csv'
 
-set :c, 0
+###initialize variables
+Calldata = Struct.new(:url, :call_sid, :transcription_text)
 
-###get urls from csv file
-# begin
-	csv_fname = "callinfo.csv"
-	csv = CSV.read( csv_fname, :headers=>true)
-	urls = csv['call_recording_url']
-	urls = urls.uniq
-	
-	# puts "$mark$ csv was read, there are #{url_count} urls in the list. Should be 204"
-	# rescue Exception => msg
-	# "$mark$ had this error: #{msg}"
-	# puts msg
-# end
+set :c, 0
+account_sid = 'AC9fa35979fae87eed73594023536ccf27'
+auth_token = '6fd2527fc56e049891fe3dd59dffba53'
+@client = Twilio::REST::Client.new account_sid, auth_token
 
 # urls = ["https://calltrackdata.com/webreports/audio.jsp?callID=2086781467&authentication=E83484B24EC788F446EABC7F6B4049A0",
 # "https://calltrackdata.com/webreports/audio.jsp?callID=44609277&authentication=5D46E05C2DF139E6C4C47F16206287C1",
 # "https://calltrackdata.com/webreports/audio.jsp?callID=2086796602&authentication=3B37BCD861F88B4F8D4366E3004370B5"]
 
+call_data = []
+
 url_count = urls.length
+
+###other functions
+
+def makecall()
+	@call = @client.account.calls.create(:url => "http://twilio-server-new-env-muim7wftii.elasticbeanstalk.com/get-twiml", :from => "+18189460042", :to => "18189460048", :method => "POST")
+end
 
 ###check url for redirects
 
@@ -37,82 +38,56 @@ def getredirectedurl(url)
 	return result.last_effective_url
 end
 
-###sinatra get request handling %r{/.*}
+###sinatra get/post/head handling %r{/.*}
 
-get '/' do
-	puts "You should not see this"
-	return "You should not see this"
-end
-
+###GET
 get '/favicon.ico' do
 	puts "We have no icons for you, shoo!"
 	return "We have no icons for you, shoo!"
 end
 
 get '/get-twiml' do
-	pass if settings.c >= url_count 
-	
-	twil_obj = Twilio::TwiML::Response.new do |r|
-		# r.Say 'Hello. The recording will play now.'
-	    r.Say getredirectedurl(urls[settings.c]).sub('https', 'http')
-	end
-
-	return twil_obj.text
-
-	###format twil_text for html code
-	# temp_text = twil_obj.text
-	# temp_text.gsub! '&', '&amp'
-	# temp_text.gsub! '<', '&lt'
-	# temp_text.gsub! '>', '&gt'
-	# temp_text.gsub! '"', '&quot'
-	# temp_text.gsub! '\'', '&#039'
-
-	# twil_text = "<html>\n<body>\n<pre>\n" + temp_text + "\n</pre>\n</body>\n</html>"
+	pass if settings.c >= url_count
+	"<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Play>#{getredirectedurl(urls[settings.c]).sub('https', 'http')}</Play></Response>"
 end
 
 get '/get-twiml' do
 	pass if settings.c < url_count
 	puts "No more files to send!"
-	return "No more files!"
+	"<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Reject /></Response>"
 end
 
+get '/test' do
+	puts "testing..."
+	return "#{call_data[0]}\n#{call_data[1]}\n#{call_data[2]}\nend"
+end
+
+get %r{/.*} do
+	puts "Bad request: use '/get-twiml'"
+	return "Bad request: use '/get-twiml'"
+end
+
+# get '/get-transcriptions'
+
+###POST
 post '/get-twiml' do
 	pass if settings.c >= url_count 
-	
-	twil_obj = Twilio::TwiML::Response.new do |r|
-		# r.Say 'Hello. The recording will play now.'
-	    r.Play getredirectedurl(urls[settings.c]).sub('https', 'http')
-	end
-
-	return twil_obj.text
-
-	###format twil_text for html code
-	# temp_text = twil_obj.text
-	# temp_text.gsub! '&', '&amp'
-	# temp_text.gsub! '<', '&lt'
-	# temp_text.gsub! '>', '&gt'
-	# temp_text.gsub! '"', '&quot'
-	# temp_text.gsub! '\'', '&#039'
-
-	# twil_text = "<html>\n<body>\n<pre>\n" + temp_text + "\n</pre>\n</body>\n</html>"
+	"<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Play>#{getredirectedurl(urls[settings.c]).sub('https', 'http')}</Play></Response>"
 end
 
 post '/get-twiml' do
 	pass if settings.c < url_count
 	puts "No more files to send!"
-	return "No more files!"
+	"<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Reject /></Response>"
 end
 
-# post %r{/.*} do
-# 	puts "Attempted POST"
-# 	return "NO POST ON SUNDAYS"
-# end
-
+###HEAD
 head %r{/.*} do
 	puts "Attempted HEAD"
 	return "HEAD AWAY FROM HERE"
 end
 
+###after /get-twiml
 after '/get-twiml' do
 	if settings.c < url_count
 		settings.c += 1
