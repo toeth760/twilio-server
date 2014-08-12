@@ -17,7 +17,7 @@ get %r{/.*} do
 end
 
 ###POST
-post '/get-twiml/:url' do
+post '/get-twiml/*' do
 		puts "sending twiml. url: http://#{params[:url]}"
 		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Play>http://#{params[:splat][0]}</Play></Response>"
 end
