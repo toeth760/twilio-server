@@ -22,6 +22,11 @@ post '/get-twiml/:url' do
 		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Play>http://#{params[:splat][0]}</Play></Response>"
 end
 
+post %r{/.*} do
+	puts "Bad request: use '/get-twiml/url'"
+	return "Bad request: use '/get-twiml/url'"
+end
+
 ###HEAD
 head %r{/.*} do
 	puts "Attempted HEAD"
