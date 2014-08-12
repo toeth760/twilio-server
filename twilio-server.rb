@@ -19,7 +19,7 @@ end
 ###POST
 post '/get-twiml/:url' do
 		puts "sending twiml. url: http://#{params[:url]}"
-		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Play>http://#{params[:url]}</Play></Response>"
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Play>http://#{params[:url][0]}</Play></Response>"
 end
 
 ###HEAD
