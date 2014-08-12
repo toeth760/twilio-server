@@ -6,9 +6,9 @@ get '/favicon.ico' do
 	return "We have no icons for you, shoo!"
 end
 
-get '/get-twiml/:url' do
+get '/get-twiml/*' do
 		puts "sending twiml. url: http://#{params[:url]}"
-		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Play>http://#{params[:url]}</Play></Response>"
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Play>http://#{params[:splat]}</Play></Response>"
 end
 
 get %r{/.*} do
