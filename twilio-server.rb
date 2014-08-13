@@ -22,14 +22,14 @@ get %r{/.*} do
 end
 
 ###POST
-post '/get-twiml/*' do
-		puts "sending twiml. url: http://#{params[:url]}"
-		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Play>http://#{params[:splat][0]}</Play></Response>"
-end
-
 post '/reject' do
 		puts "rejecting call"
 		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Reject /></Response>"
+end
+
+post '/get-twiml/*' do
+		puts "sending twiml. url: http://#{params[:url]}"
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Play>http://#{params[:splat][0]}</Play></Response>"
 end
 
 post %r{/.*} do
