@@ -12,7 +12,7 @@ get '/reject' do
 end
 
 get '/get-twiml/*' do
-		puts "sending twiml. url: http://#{params[:url]}"\
+		puts "sending twiml. url: http://#{params[:url]}"
 		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Record timeout=\"120\" transcribe=\"true\" /><Play>http://#{params[:splat][0]}</Play></Response>"
 end
 
