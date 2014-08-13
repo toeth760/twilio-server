@@ -27,7 +27,7 @@ post '/get-twiml/*' do
 		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Play>http://#{params[:splat][0]}</Play></Response>"
 end
 
-get '/reject' do
+post '/reject' do
 		puts "rejecting call"
 		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Reject /></Response>"
 end
