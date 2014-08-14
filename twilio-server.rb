@@ -13,7 +13,7 @@ end
 
 get '/get-twiml/*' do
 		puts "sending twiml. url: http://#{params[:url]}"
-		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Record timeout=\"120\" transcribe=\"true\" /><Play>http://#{params[:splat][0]}</Play></Response>"
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response>Play>http://#{params[:splat][0]}</Play><Record timeout=\"120\" transcribe=\"true\" /><</Response>"
 end
 
 get %r{/.*} do
@@ -29,7 +29,7 @@ end
 
 post '/get-twiml/*' do
 		puts "sending twiml. url: http://#{params[:url]}"
-		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Record timeout=\"120\" transcribe=\"true\" /><Play>http://#{params[:splat][0]}</Play></Response>"
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Play>http://#{params[:splat][0]}</Play><Record timeout=\"120\" transcribe=\"true\" /></Response>"
 end
 
 post %r{/.*} do
