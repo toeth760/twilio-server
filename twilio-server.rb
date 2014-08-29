@@ -1,5 +1,6 @@
 require 'sinatra'
 
+#simple sinatra application made externally available using AWS Beanstalk. Simply returns twiml with the url given in the request
 ###GET
 get '/favicon.ico' do
 	puts "We have no icons for you, shoo!"
